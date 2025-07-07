@@ -1,24 +1,50 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { FiFilter, FiGrid, FiList, FiSearch } from 'react-icons/fi';
-import { products, categories } from '../data/products';
 import ProductCard from '../components/ProductCard';
+import { fetchProducts } from '../services/apiService';
 
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  category: string;
+  price: number;
+  rating: number;
+  image: string;
+  sizes: string[];
+  colors: string[];
+  inStock: boolean;
+  reviews: number;
+}
 
 const Products: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState('Todos');
   const [sortBy, setSortBy] = useState('name');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [priceRange, setPriceRange] = useState({ min: 0, max: 200 });
-  const [showFilters, setShowFilters] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Simular carga cuando cambian los filtros
   useEffect(() => {
-    setIsLoading(true);
-    const timer = setTimeout(() => setIsLoading(false), 300);
-    return () => clearTimeout(timer);
-  }, [selectedCategory, sortBy, priceRange, searchTerm]);
+    const loadProducts = async () => {
+      setIsLoading(true);
+      try {
+        const data = await fetchProducts();
+        if (!Array.isArray(data)) {
+          throw new Error('La respuesta del backend no es un arreglo de productos.');
+        }
+        setProducts(data);
+      } catch (error) {
+        console.error('Error loading products:', error);
+        alert('Hubo un problema al cargar los productos. Por favor, verifica el backend.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
 
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = products.filter((product) => {
@@ -43,7 +69,7 @@ const Products: React.FC = () => {
           return a.name.localeCompare(b.name);
       }
     });
-  }, [selectedCategory, sortBy, priceRange, searchTerm]);
+  }, [products, selectedCategory, sortBy, priceRange, searchTerm]);
 
   return (
     <div className="min-h-screen bg-black">
@@ -75,7 +101,7 @@ const Products: React.FC = () => {
                 <div className="mb-3">
                   <h5 className="fw-bold">Categorías</h5>
                   <div className="btn-group-vertical w-100">
-                    {categories.map((category) => (
+                    {['Todos', ...new Set(products.map((p) => p.category))].map((category) => (
                       <button
                         key={category}
                         className={`btn btn-outline-secondary ${selectedCategory === category ? 'active' : ''}`}
@@ -142,11 +168,15 @@ const Products: React.FC = () => {
 
             {/* Products Grid */}
             <div className="row g-4">
-              {filteredAndSortedProducts.map((product) => (
-                <div key={product.id} className="col-12 col-sm-6 col-lg-4">
-                  <ProductCard product={product} />
-                </div>
-              ))}
+              {isLoading ? (
+                <p>Cargando productos...</p>
+              ) : (
+                filteredAndSortedProducts.map((product) => (
+                  <div key={product.id} className="col-12 col-sm-6 col-lg-4">
+                    <ProductCard product={product} />
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>
