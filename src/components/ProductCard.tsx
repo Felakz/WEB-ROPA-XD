@@ -42,14 +42,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <>
-      <Card className="h-100 card-hover border-0 shadow-sm bg-dark text-white product-card hover-lift">
+      <Card className="h-100 card-hover border-0 shadow-lg bg-light text-dark product-card hover-scale">
         <div className="position-relative overflow-hidden">
           <Card.Img
             variant="top"
             src={product.image}
             alt={product.name}
-            className="product-image"
-            style={{ borderRadius: '8px 8px 0 0' }}
+            className="product-image rounded-top"
           />
           
           {/* Badges */}
@@ -69,7 +68,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <Button
               variant={isWishlist ? "danger" : "light"}
               size="sm"
-              className="mb-1 d-block"
+              className="mb-1 d-block rounded-circle"
               onClick={() => setIsWishlist(!isWishlist)}
             >
               <FiHeart fill={isWishlist ? 'currentColor' : 'none'} />
@@ -77,7 +76,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <Button
               variant="light"
               size="sm"
-              className="d-block"
+              className="d-block rounded-circle"
               onClick={() => setShowModal(true)}
             >
               <FiEye />
@@ -85,12 +84,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
         </div>
 
-        <Card.Body className="d-flex flex-column bg-dark">
+        <Card.Body className="d-flex flex-column">
           <div className="mb-2">
-            <Badge bg="light" text="dark" className="mb-2">
+            <Badge bg="primary" className="mb-2">
               {product.category}
             </Badge>
-            <Card.Title className="h6 fw-bold text-white">
+            <Card.Title className="h6 fw-bold">
               {product.name}
             </Card.Title>
           </div>
@@ -100,23 +99,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               <div className="me-2">
                 {renderStars(product.rating)}
               </div>
-              <small className="text-light">
+              <small className="text-muted">
                 ({product.reviews} reseñas)
               </small>
             </div>
             <div className="d-flex align-items-center">
-              <span className="h5 fw-bold text-white mb-0 me-2">
+              <span className="h5 fw-bold text-success mb-0 me-2">
                 ${product.price.toFixed(2)}
               </span>
               {product.originalPrice && (
-                <small className="text-light text-decoration-line-through">
+                <small className="text-muted text-decoration-line-through">
                   ${product.originalPrice.toFixed(2)}
                 </small>
               )}
             </div>
           </div>
 
-          <Card.Text className="text-light small flex-grow-1">
+          <Card.Text className="text-muted small flex-grow-1">
             {product.description}
           </Card.Text>
 
@@ -124,9 +123,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <Row className="g-2">
               <Col>
                 <Button
-                  variant="light"
+                  variant="success"
                   size="sm"
-                  className="w-100 text-dark"
+                  className="w-100"
                   disabled={!product.inStock}
                   onClick={handleAddToCart}
                 >
@@ -137,7 +136,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               {product.inStock && (
                 <Col xs="auto">
                   <Button
-                    variant="outline-light"
+                    variant="outline-success"
                     size="sm"
                     onClick={handleQuickAdd}
                     title="Compra rápida"
