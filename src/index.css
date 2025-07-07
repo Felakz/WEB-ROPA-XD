@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Custom styles */
+:root {
+  --primary-color: #ffffff;
+  --primary-hover: #f0f0f0;
+  --primary-light: #f8f9fa;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #000000;
+  color: #000000;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Custom Bootstrap theme */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #000000 !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: #000000 !important;
+}
+
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.border-primary {
+  border-color: var(--primary-color) !important;
+}
+
+/* White primary color adjustments */
+.text-primary {
+  color: #000000 !important;
+}
+
+.bg-primary {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.border-primary {
+  border-color: #ffffff !important;
+}
+
+/* Button outline primary for dark theme */
+.btn-outline-primary {
+  color: #000000;
+  border-color: #000000;
+}
+
+.btn-outline-primary:hover {
+  background-color: #000000;
+  border-color: #000000;
+  color: #ffffff;
+}
+
+/* Badge primary */
+.badge.bg-primary {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Links and icons */
+.text-decoration-none {
+  color: inherit;
+}
+
+/* Product card price primary color */
+.h5.text-primary {
+  color: #000000 !important;
+}
+
+/* Custom component styles */
+.navbar-brand {
+  font-weight: 700;
+}
+
+.card-hover {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.product-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.hero-section {
+  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+  color: #000000;
+  padding: 100px 0;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+/* Dark theme adjustments */
+.bg-light {
+  background-color: #f8f9fa !important;
+  color: #000000 !important;
+}
+
+.bg-white {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.text-dark {
+  color: #000000 !important;
+}
+
+.text-muted {
+  color: #666666 !important;
+}
+
+.card {
+  background-color: #ffffff !important;
+  border-color: #dddddd !important;
+  color: #000000 !important;
+}
+
+.navbar {
+  background-color: #1a1a1a !important;
+  border-bottom-color: #444444 !important;
+}
+
+/* Force black text on white/light backgrounds */
+section {
+  color: #000000 !important;
+}
+
+section h1, section h2, section h3, section h4, section h5, section h6 {
+  color: #000000 !important;
+}
+
+section p, section .lead {
+  color: #000000 !important;
+}
+
+.container {
+  color: #000000 !important;
+}
+
+/* Buttons with black text */
+.btn-outline-dark {
+  color: #000000;
+  border-color: #000000;
+}
+
+.btn-outline-dark:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
