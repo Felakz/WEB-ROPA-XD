@@ -42,7 +42,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <>
-      <Card className="h-100 card-hover border-0 shadow-sm">
+      <Card className="h-100 card-hover border-0 shadow-sm bg-dark text-white product-card hover-lift">
         <div className="position-relative overflow-hidden">
           <Card.Img
             variant="top"
@@ -85,12 +85,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
         </div>
 
-        <Card.Body className="d-flex flex-column">
+        <Card.Body className="d-flex flex-column bg-dark">
           <div className="mb-2">
             <Badge bg="light" text="dark" className="mb-2">
               {product.category}
             </Badge>
-            <Card.Title className="h6 fw-bold text-dark">
+            <Card.Title className="h6 fw-bold text-white">
               {product.name}
             </Card.Title>
           </div>
@@ -100,23 +100,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               <div className="me-2">
                 {renderStars(product.rating)}
               </div>
-              <small className="text-muted">
+              <small className="text-light">
                 ({product.reviews} reseñas)
               </small>
             </div>
             <div className="d-flex align-items-center">
-              <span className="h5 fw-bold text-primary mb-0 me-2">
+              <span className="h5 fw-bold text-white mb-0 me-2">
                 ${product.price.toFixed(2)}
               </span>
               {product.originalPrice && (
-                <small className="text-muted text-decoration-line-through">
+                <small className="text-light text-decoration-line-through">
                   ${product.originalPrice.toFixed(2)}
                 </small>
               )}
             </div>
           </div>
 
-          <Card.Text className="text-muted small flex-grow-1">
+          <Card.Text className="text-light small flex-grow-1">
             {product.description}
           </Card.Text>
 
@@ -124,9 +124,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <Row className="g-2">
               <Col>
                 <Button
-                  variant="primary"
+                  variant="light"
                   size="sm"
-                  className="w-100"
+                  className="w-100 text-dark"
                   disabled={!product.inStock}
                   onClick={handleAddToCart}
                 >
@@ -137,7 +137,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               {product.inStock && (
                 <Col xs="auto">
                   <Button
-                    variant="outline-primary"
+                    variant="outline-light"
                     size="sm"
                     onClick={handleQuickAdd}
                     title="Compra rápida"
@@ -152,11 +152,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </Card>
 
       {/* Modal de detalles del producto */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
-        <Modal.Header closeButton>
+      <Modal show={showModal} onHide={() => setShowModal(false)} size="lg" data-bs-theme="dark">
+        <Modal.Header closeButton className="bg-dark text-white">
           <Modal.Title>{product.name}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="bg-dark text-white">
           <Row>
             <Col md={6}>
               <img
@@ -166,9 +166,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               />
             </Col>
             <Col md={6}>
-              <h5 className="text-primary">${product.price.toFixed(2)}</h5>
+              <h5 className="text-white">${product.price.toFixed(2)}</h5>
               {product.originalPrice && (
-                <p className="text-muted text-decoration-line-through">
+                <p className="text-light text-decoration-line-through">
                   Precio original: ${product.originalPrice.toFixed(2)}
                 </p>
               )}
@@ -176,19 +176,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               <div className="mb-3">
                 <div className="d-flex align-items-center mb-2">
                   {renderStars(product.rating)}
-                  <span className="ms-2 text-muted">
+                  <span className="ms-2 text-light">
                     {product.rating}/5 ({product.reviews} reseñas)
                   </span>
                 </div>
               </div>
 
-              <p className="text-muted">{product.description}</p>
+              <p className="text-light">{product.description}</p>
 
               <Form.Group className="mb-3">
-                <Form.Label>Talla</Form.Label>
+                <Form.Label className="text-white">Talla</Form.Label>
                 <Form.Select
                   value={selectedSize}
                   onChange={(e) => setSelectedSize(e.target.value)}
+                  className="bg-dark text-white border-secondary"
                 >
                   <option value="">Selecciona una talla</option>
                   {product.sizes.map(size => (
@@ -198,10 +199,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Color</Form.Label>
+                <Form.Label className="text-white">Color</Form.Label>
                 <Form.Select
                   value={selectedColor}
                   onChange={(e) => setSelectedColor(e.target.value)}
+                  className="bg-dark text-white border-secondary"
                 >
                   <option value="">Selecciona un color</option>
                   {product.colors.map(color => (
@@ -212,12 +214,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </Col>
           </Row>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="bg-dark">
           <Button variant="secondary" onClick={() => setShowModal(false)}>
             Cerrar
           </Button>
           <Button
-            variant="primary"
+            variant="light"
             onClick={() => {
               if (selectedSize && selectedColor) {
                 addItem(product, selectedSize, selectedColor);
@@ -225,6 +227,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               }
             }}
             disabled={!selectedSize || !selectedColor || !product.inStock}
+            className="text-dark"
           >
             <FiShoppingCart className="me-1" />
             Agregar al Carrito
