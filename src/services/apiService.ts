@@ -5,8 +5,8 @@ const API_BASE_URL = 'http://localhost:8080';
 
 export const fetchProducts = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/products`);
-    console.log('Productos obtenidos:', response.data); // Log para depurar
+    const response = await axios.get(`${API_BASE_URL}/api/products`);
+    console.log('Productos obtenidos:', response.data); 
     return response.data;
   } catch (error) {
     console.error('Error fetching products:', error);

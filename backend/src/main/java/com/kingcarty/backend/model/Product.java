@@ -11,13 +11,28 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String description;
     private Double price;
-    private Integer stock;
+    private String category;
+    private String imageUrl;
+    private String sizes;
+    private String colors;
+    private Double rating;
+    private Integer reviews;
 
-    // Getters and Setters
+    public Product() {
+    }
+
+    public Product(String name, String description, String category, Double price, String imageUrl) {
+        this.name = name;
+        this.description = description;
+        this.category = category;
+        this.price = price;
+        this.imageUrl = imageUrl;
+    }
+
+    // Getters y setters
     public Long getId() {
         return id;
     }
@@ -50,11 +65,51 @@ public class Product {
         this.price = price;
     }
 
-    public Integer getStock() {
-        return stock;
+    public String getCategory() {
+        return category;
     }
 
-    public void setStock(Integer stock) {
-        this.stock = stock;
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(String sizes) {
+        this.sizes = sizes;
+    }
+
+    public String getColors() {
+        return colors;
+    }
+
+    public void setColors(String colors) {
+        this.colors = colors;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public Integer getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Integer reviews) {
+        this.reviews = reviews;
     }
 }

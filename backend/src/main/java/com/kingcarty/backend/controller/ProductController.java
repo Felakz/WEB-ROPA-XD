@@ -3,6 +3,7 @@ package com.kingcarty.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,10 +18,15 @@ import com.kingcarty.backend.service.ProductService;
 
 @RestController
 @RequestMapping("/api/products")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000"})
 public class ProductController {
 
+    private final ProductService productService;
+
     @Autowired
-    private ProductService productService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping
     public List<Product> getAllProducts() {
@@ -28,8 +34,8 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product addProduct(@RequestBody Product product) {
-        return productService.addProduct(product);
+    public Product createProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
     }
 
     @PutMapping("/{id}")
