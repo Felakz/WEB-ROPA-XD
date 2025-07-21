@@ -12,7 +12,7 @@ import {
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 
-const NavigationBar: React.FC = () => {
+  const NavigationBar: React.FC = () => {
   const [expanded, setExpanded] = useState(false);
   const { state: cartState } = useCart();
   const { state: authState, logout } = useAuth();
